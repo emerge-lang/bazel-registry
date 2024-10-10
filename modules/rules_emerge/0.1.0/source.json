@@ -1,6 +1,5 @@
 {
     "type": "git_repository",
     "remote": "https://github.com/emerge-lang/compiler.git",
-    "tag": "v0.1.0",
-    "strip_prefix": "bazel/rules_emerge"
+    "tag": "v0.1.0"
 }
