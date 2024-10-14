@@ -1,0 +1,5 @@
+{
+    "type": "git_repository",
+    "remote": "https://github.com/emerge-lang/compiler.git",
+    "tag": "v0.2.0"
+}
