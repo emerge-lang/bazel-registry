@@ -1,0 +1,32 @@
+module(
+    name = "rules_emerge",
+    version = "0.3.2",
+)
+
+# these two lines are syntactically sensitive: the .github/workflows/release.yaml workflows will update these two variables
+# with the correct reference to the release artifacts on all new releases
+_WINDOWS_DOWNLOAD_URL = "https://github.com/emerge-lang/compiler/releases/download/v0.3.2/emerge-toolchain-windows-x86_64-0.3.2.zip"
+
+_WINDOWS_SHA256 = "0D1FD217550A1EA0BCB164217CE8D5E5BC3D389672A91066D31F4752BB75CEBD"
+
+bazel_dep(name = "platforms", version = "0.0.10")
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "toolchain-windows",
+    build_file_content = """
+filegroup(
+    name = "all_files",
+    srcs = glob(["**/*.*"]),
+    visibility = ["//visibility:public"],
+)
+    """,
+    sha256 = _WINDOWS_SHA256,
+    url = _WINDOWS_DOWNLOAD_URL,
+)
+
+register_toolchains(
+    "//:all",
+)
